@@ -1,0 +1,22 @@
+.card {
+  border-radius: 4px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: transform var(--animation);
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+.descr {
+  display: flex;
+  align-items: center;
+  min-height: 58px;
+  padding: 10px;
+}
+
+.title {
+  font-size: 14px;
+  font-weight: 500;
+}

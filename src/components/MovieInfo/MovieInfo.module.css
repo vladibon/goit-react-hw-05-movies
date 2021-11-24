@@ -1,0 +1,40 @@
+.card {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@media screen and (max-width: 519px) {
+  .card {
+    margin-bottom: 30px;
+  }
+}
+
+.thumb {
+  width: 220px;
+  margin-right: 30px;
+  margin-bottom: 30px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.content {
+  width: calc(100% - 250px);
+}
+
+@media screen and (max-width: 519px) {
+  .content {
+    width: 100%;
+  }
+}
+
+.title {
+  margin-bottom: 20px;
+}
+
+.descr:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.descrTitle {
+  margin-bottom: 12px;
+}

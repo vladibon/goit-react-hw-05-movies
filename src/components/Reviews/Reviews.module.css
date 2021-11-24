@@ -1,0 +1,13 @@
+.reviews {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.reviewsItem {
+  margin-bottom: 20px;
+}
+
+.author {
+  font-weight: 600;
+  margin-bottom: 10px;
+}

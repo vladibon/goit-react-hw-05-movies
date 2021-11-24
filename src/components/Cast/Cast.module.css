@@ -1,0 +1,28 @@
+.cast {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.castList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  grid-gap: 10px;
+}
+
+.castItem {
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.image {
+  min-height: 160px;
+}
+
+.descr {
+  padding: 2px;
+}
+
+.character {
+  font-size: 12px;
+}

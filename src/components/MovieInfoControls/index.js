@@ -1,0 +1,1 @@
+export { MovieInfoControls } from './MovieInfoControls';
