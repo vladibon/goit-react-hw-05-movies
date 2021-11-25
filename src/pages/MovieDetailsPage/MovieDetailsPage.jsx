@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams, Outlet } from 'react-router-dom';
-import { MovieInfo } from 'components/MovieInfo';
-import { MovieInfoControls } from 'components/MovieInfoControls';
-import { GoBackButton } from 'components/GoBackButton';
+import MovieInfo from 'components/MovieInfo';
+import MovieInfoControls from 'components/MovieInfoControls';
+import GoBackButton from 'components/GoBackButton';
 import { fetchMovieInfo } from 'api/movie-db';
 import s from './MovieDetailsPage.module.css';
 
@@ -17,7 +17,6 @@ function MovieDetailsPage() {
   return (
     <main>
       <GoBackButton />
-
       {movie && <MovieInfo movie={movie} />}
 
       <section>
@@ -29,4 +28,4 @@ function MovieDetailsPage() {
   );
 }
 
-export { MovieDetailsPage };
+export default MovieDetailsPage;

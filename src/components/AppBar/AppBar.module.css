@@ -13,8 +13,13 @@
   justify-content: space-between;
 }
 
-.logo {
+.logoLink {
   width: 220px;
   padding-top: 12px;
   padding-bottom: 12px;
+}
+
+.logo {
+  width: 100%;
+  height: 100%;
 }

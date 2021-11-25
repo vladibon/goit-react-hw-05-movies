@@ -31,4 +31,4 @@ MovieInfo.propTypes = {
   overview: PropTypes.string,
 };
 
-export { MovieInfo };
+export default MovieInfo;

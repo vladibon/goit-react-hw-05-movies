@@ -23,4 +23,4 @@ MovieCard.propTypes = {
   title: PropTypes.string.isRequired,
 };
 
-export { MovieCard };
+export default MovieCard;

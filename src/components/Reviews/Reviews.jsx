@@ -28,4 +28,4 @@ function Reviews() {
   );
 }
 
-export { Reviews };
+export default Reviews;

@@ -1,1 +1,1 @@
-export { HomePage } from './HomePage.jsx';
+export { default } from './HomePage.jsx';

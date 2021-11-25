@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { MovieCard } from 'components/MovieCard';
+import MovieCard from 'components/MovieCard';
 import s from './MovieList.module.css';
 
 function MovieList({ movies }) {
@@ -25,4 +25,4 @@ MovieList.propTypes = {
   ).isRequired,
 };
 
-export { MovieList };
+export default MovieList;

@@ -1,1 +1,1 @@
-export { MovieInfoControls } from './MovieInfoControls';
+export { default } from './MovieInfoControls';

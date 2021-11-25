@@ -1,8 +1,8 @@
 import { useParams } from 'react-router-dom';
 import { useFetch, Status } from 'hooks/useFetch';
 import { URL } from 'api/movie-db';
-import s from './Cast.module.css';
 import defaultImage from 'images/defaultCast.png';
+import s from './Cast.module.css';
 
 function Cast() {
   const { movieId } = useParams();
@@ -39,4 +39,4 @@ function Cast() {
   );
 }
 
-export { Cast };
+export default Cast;

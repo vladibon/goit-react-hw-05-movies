@@ -1,1 +1,1 @@
-export { PageControls } from './PageControls';
+export { default } from './PageControls';

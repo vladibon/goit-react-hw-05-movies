@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { SearchForm } from 'components/SearchForm';
-import { Section } from 'components/Section/Section';
-import { MovieList } from 'components/MovieList';
-import { PageControls } from 'components/PageControls';
+import SearchForm from 'components/SearchForm';
+import Section from 'components/Section/Section';
+import MovieList from 'components/MovieList';
+import PageControls from 'components/PageControls';
 import { fetchSearchedMovies } from 'api/movie-db';
 
 function MoviesPage() {
-  const [searchParams, setSearchParams] = useSearchParams();
   const [movies, setMovies] = useState([]);
   const [totalPages, setTotalPages] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const query = searchParams.get('query');
   const page = searchParams.get('page');
@@ -30,6 +30,9 @@ function MoviesPage() {
     setSearchParams({ query: newQuery, page: 1 });
   };
 
+  const handleClick = step =>
+    setSearchParams({ query, page: Number(page) + step });
+
   return (
     <main>
       <SearchForm onSubmit={handleSubmit} />
@@ -40,10 +43,8 @@ function MoviesPage() {
 
           <PageControls
             page={Number(page)}
+            setPage={handleClick}
             isLastPage={isLastPage}
-            setNextPage={step =>
-              setSearchParams({ query, page: Number(page) + step })
-            }
           />
         </Section>
       )}
@@ -51,4 +52,4 @@ function MoviesPage() {
   );
 }
 
-export { MoviesPage };
+export default MoviesPage;

@@ -1,6 +1,8 @@
 :root {
   --text-color: #2a363b;
-  --accent-color: #5dade2;
+  --accent-color: #00bfff;
+
+  --overlay-bg-color: rgba(0, 0, 0, 0.15);
 
   --shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
     1px 4px 6px rgba(0, 0, 0, 0.16);
@@ -16,6 +18,11 @@ body {
   color: var(--text-color);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+main {
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 ul {
@@ -43,9 +50,4 @@ h5,
 h6,
 p {
   margin: 0;
-}
-
-main {
-  padding-top: 30px;
-  padding-bottom: 30px;
 }

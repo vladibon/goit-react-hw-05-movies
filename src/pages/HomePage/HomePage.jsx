@@ -1,14 +1,13 @@
 import { useState, useEffect } from 'react';
-import { Section } from 'components/Section/Section';
-import { MovieList } from 'components/MovieList';
-import { PageControls } from 'components/PageControls';
+import Section from 'components/Section/Section';
+import MovieList from 'components/MovieList';
+import PageControls from 'components/PageControls';
 import { fetchTrendingMovies } from 'api/movie-db';
 
 function HomePage() {
   const [page, setPage] = useState(1);
   const [movies, setMovies] = useState([]);
   const [totalPages, setTotalPages] = useState(null);
-
   const isLastPage = page === totalPages;
 
   useEffect(() => {
@@ -18,6 +17,8 @@ function HomePage() {
     });
   }, [page]);
 
+  const handleClick = step => setPage(page => page + step);
+
   return (
     <main>
       {movies.length > 0 && (
@@ -26,8 +27,8 @@ function HomePage() {
 
           <PageControls
             page={page}
+            setPage={handleClick}
             isLastPage={isLastPage}
-            setNextPage={step => setPage(page => page + step)}
           />
         </Section>
       )}
@@ -35,4 +36,4 @@ function HomePage() {
   );
 }
 
-export { HomePage };
+export default HomePage;

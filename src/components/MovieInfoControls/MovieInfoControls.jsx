@@ -17,4 +17,4 @@ function MovieInfoControls() {
   );
 }
 
-export { MovieInfoControls };
+export default MovieInfoControls;

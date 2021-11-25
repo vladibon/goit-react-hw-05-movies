@@ -29,7 +29,7 @@ function SearchForm({ onSubmit }) {
       />
 
       <button type='submit' className={s.button} aria-label='Search images'>
-        <ImSearch style={{ width: 22, height: 22 }} />
+        <ImSearch className={s.icon} />
       </button>
     </form>
   );
@@ -39,4 +39,4 @@ SearchForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 };
 
-export { SearchForm };
+export default SearchForm;

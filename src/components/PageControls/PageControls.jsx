@@ -1,25 +1,33 @@
 import PropTypes from 'prop-types';
+import {
+  HiOutlineArrowNarrowLeft as ArrowLeft,
+  HiOutlineArrowNarrowRight as ArrowRight,
+} from 'react-icons/hi';
 import s from './PageControls.module.css';
 
-function PageControls({ page, isLastPage, setNextPage }) {
+function PageControls({ page, setPage, isLastPage }) {
   return (
     <div className={s.controls}>
       <button
         className={s.button}
         type='button'
+        aria-label='Previous page'
+        onClick={() => setPage(-1)}
         disabled={page === 1}
-        onClick={() => setNextPage(-1)}
       >
-        Previous page
+        <ArrowLeft className={s.icon} />
       </button>
+
+      <p className={s.page}>{page}</p>
 
       <button
         className={s.button}
         type='button'
+        aria-label='Next page'
+        onClick={() => setPage(1)}
         disabled={isLastPage}
-        onClick={() => setNextPage(1)}
       >
-        Next page
+        <ArrowRight className={s.icon} />
       </button>
     </div>
   );
@@ -27,8 +35,8 @@ function PageControls({ page, isLastPage, setNextPage }) {
 
 PageControls.propTypes = {
   page: PropTypes.number.isRequired,
+  setPage: PropTypes.func.isRequired,
   isLastPage: PropTypes.bool,
-  setNextPage: PropTypes.func.isRequired,
 };
 
-export { PageControls };
+export default PageControls;
