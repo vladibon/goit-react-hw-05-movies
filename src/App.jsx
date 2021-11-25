@@ -4,28 +4,40 @@ import AppBar from 'components/AppBar';
 import Container from 'components/Container';
 import Loading from 'components/Loading/Loading';
 
-const HomePage = lazy(() => import('pages/HomePage'));
-const MoviesPage = lazy(() => import('pages/MoviesPage'));
-const MovieDetailsPage = lazy(() => import('pages/MovieDetailsPage'));
-const Cast = lazy(() => import('components/Cast'));
-const Reviews = lazy(() => import('components/Reviews'));
+const HomePage = lazy(() =>
+  import('pages/HomePage' /* webpackChunkName: "home-page" */),
+);
+const MoviesPage = lazy(() =>
+  import('pages/MoviesPage' /* webpackChunkName: "movies-page" */),
+);
+const MovieDetailsPage = lazy(() =>
+  import('pages/MovieDetailsPage' /* webpackChunkName: "details-page" */),
+);
+const Cast = lazy(() =>
+  import('components/Cast' /* webpackChunkName: "cast" */),
+);
+const Reviews = lazy(() =>
+  import('components/Reviews' /* webpackChunkName: "reviews" */),
+);
 
 function App() {
   return (
-    <Suspense fallback={<Loading />}>
+    <>
       <AppBar />
       <Container>
-        <Routes>
-          <Route path='/' element={<HomePage />} />
-          <Route path='/movies' element={<MoviesPage />} />
-          <Route path='/movies/:movieId' element={<MovieDetailsPage />}>
-            <Route path='cast' element={<Cast />} />
-            <Route path='reviews' element={<Reviews />} />
-          </Route>
-          <Route path='*' element={<Navigate replace to='/' />} />
-        </Routes>
+        <Suspense fallback={<Loading />}>
+          <Routes>
+            <Route path='/' element={<HomePage />} />
+            <Route path='/movies' element={<MoviesPage />} />
+            <Route path='/movies/:movieId' element={<MovieDetailsPage />}>
+              <Route path='cast' element={<Cast />} />
+              <Route path='reviews' element={<Reviews />} />
+            </Route>
+            <Route path='*' element={<Navigate replace to='/' />} />
+          </Routes>
+        </Suspense>
       </Container>
-    </Suspense>
+    </>
   );
 }
 

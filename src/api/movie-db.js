@@ -13,7 +13,9 @@ const pathname = {
   trending: 'trending',
   search: 'search',
 };
-const media_type = 'movie';
+const media_type = {
+  movie: 'movie',
+};
 const time_window = {
   day: 'day',
   week: 'week',
@@ -25,7 +27,7 @@ const path_params = {
 
 async function fetchTrendingMovies(page) {
   const { data } = await axios(
-    `${pathname.trending}/${media_type}/${time_window.day}`,
+    `${pathname.trending}/${media_type.movie}/${time_window.day}`,
     {
       params: { page },
     },
@@ -35,7 +37,7 @@ async function fetchTrendingMovies(page) {
 }
 
 async function fetchSearchedMovies({ query, page }) {
-  const { data } = await axios(`${pathname.search}/${media_type}`, {
+  const { data } = await axios(`${pathname.search}/${media_type.movie}`, {
     params: { query, page },
   });
 
@@ -43,7 +45,7 @@ async function fetchSearchedMovies({ query, page }) {
 }
 
 async function fetchMovieInfo(movieId) {
-  const { data } = await axios(`${media_type}/${movieId}`);
+  const { data } = await axios(`${media_type.movie}/${movieId}`);
 
   return data;
 }
@@ -51,7 +53,7 @@ async function fetchMovieInfo(movieId) {
 async function fetchMovieExtraInfo(movieId, type) {
   const isReviews = type === path_params.reviews;
   const { data } = await axios(
-    `${media_type}/${movieId}/${
+    `${media_type.movie}/${movieId}/${
       isReviews ? path_params.reviews : path_params.credits
     }`,
   );

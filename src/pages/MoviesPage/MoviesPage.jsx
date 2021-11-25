@@ -17,11 +17,13 @@ function MoviesPage() {
 
   useEffect(() => {
     if (!query) return;
+    if (!page) return setSearchParams({ query, page: 1 });
 
     fetchSearchedMovies({ query, page }).then(({ results, total_pages }) => {
       setMovies(results);
       setTotalPages(total_pages);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query, page]);
 
   const handleSubmit = newQuery => {
