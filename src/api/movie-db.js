@@ -33,7 +33,7 @@ async function fetchTrendingMovies(page) {
     },
   );
 
-  return data;
+  return data.results;
 }
 
 async function fetchSearchedMovies({ query, page }) {

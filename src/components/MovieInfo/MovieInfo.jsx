@@ -12,6 +12,7 @@ function MovieInfo({
     overview,
     genres,
     popularity,
+    vote_average,
   },
 }) {
   const stringify = arr => arr.map(({ name }) => name).join(', ');
@@ -37,8 +38,11 @@ function MovieInfo({
           <h4>Genres:</h4>
           <p>{stringify(genres)}</p>
 
+          <h4>Popularity:</h4>
+          <p>{popularity}</p>
+
           <h4>User score:</h4>
-          <p>{Number.parseInt(popularity)} %</p>
+          <p>{vote_average}</p>
         </div>
       </div>
     </article>
@@ -53,7 +57,7 @@ MovieInfo.propTypes = {
     PropTypes.shape({
       name: PropTypes.string,
     }),
-  ).isRequired,
+  ),
 };
 
 export default MovieInfo;

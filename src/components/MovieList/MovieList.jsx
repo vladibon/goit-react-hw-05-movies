@@ -7,7 +7,7 @@ function MovieList({ movies }) {
   return (
     <ul className={s.gallery}>
       {movies.map(({ id, title, poster_path }, idx) => (
-        <li key={`${id}${idx}`}>
+        <li key={`${id}$`}>
           <Link to={`/movies/${id}`}>
             <MovieCard title={title} poster_path={poster_path} />
           </Link>

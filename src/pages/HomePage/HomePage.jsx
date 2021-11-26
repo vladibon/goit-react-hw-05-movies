@@ -1,37 +1,36 @@
 import { useState, useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
 import Section from 'components/Section/Section';
 import MovieList from 'components/MovieList';
-import PageControls from 'components/PageControls';
 import { fetchTrendingMovies } from 'api/movie-db';
 
 function HomePage() {
   const [page, setPage] = useState(1);
   const [movies, setMovies] = useState([]);
-  const [totalPages, setTotalPages] = useState(null);
-  const isLastPage = page === totalPages;
+  const [ref, inView] = useInView({
+    initialInView: true,
+    rootMargin: '1200px',
+  });
 
   useEffect(() => {
-    fetchTrendingMovies(page).then(({ results, total_pages }) => {
-      setMovies(results);
-      setTotalPages(total_pages);
-    });
-  }, [page]);
+    if (!inView) return;
 
-  const handleClick = step => setPage(page => page + step);
+    fetchTrendingMovies(page).then(newMovies => {
+      setMovies(movies => [...movies, ...newMovies]);
+      setPage(page => page + 1);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inView]);
 
   return (
     <main>
       {movies.length > 0 && (
         <Section title='Trending today'>
           <MovieList movies={movies} />
-
-          <PageControls
-            page={page}
-            setPage={handleClick}
-            isLastPage={isLastPage}
-          />
         </Section>
       )}
+
+      <div ref={ref}></div>
     </main>
   );
 }
