@@ -1,17 +1,19 @@
-import { NavLink } from 'react-router-dom';
+import { useLocation, NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import s from './MovieInfoControls.module.css';
 
 function MovieInfoControls({ trailerKey }) {
+  const location = useLocation();
+
   const applyClassName = ({ isActive }) => (isActive ? s.activeLink : s.link);
 
   return (
     <div>
-      <NavLink to='cast' replace className={applyClassName}>
+      <NavLink to='cast' replace state={location} className={applyClassName}>
         Cast
       </NavLink>
 
-      <NavLink to='reviews' replace className={applyClassName}>
+      <NavLink to='reviews' replace state={location} className={applyClassName}>
         Reviews
       </NavLink>
 
