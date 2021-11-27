@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useFetch, Status } from 'hooks/useFetch';
+import Loading from 'components/Loading';
 import { URL } from 'api/movie-db';
 import defaultImage from 'images/defaultCast.png';
 import s from './Cast.module.css';
@@ -35,6 +36,8 @@ function Cast() {
       {status === Status.REJECTED && (
         <p>We don't have any cast information for this movie.</p>
       )}
+
+      {status === Status.PENDING && <Loading />}
     </>
   );
 }

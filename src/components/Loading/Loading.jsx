@@ -3,7 +3,7 @@ import s from './Loading.module.css';
 
 const Loading = () => (
   <div className={s.overlay}>
-    <Loader type='Oval' color='#00BFFF' height={120} width={120} />
+    <Loader type='Oval' color='#01b4e4' height={120} width={120} />
   </div>
 );
 

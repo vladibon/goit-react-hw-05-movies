@@ -7,16 +7,14 @@ function MovieInfo({
   movie: {
     poster_path,
     title,
-    production_countries: countries,
     release_date,
-    overview,
     genres,
+    overview,
     popularity,
     vote_average,
+    vote_count,
   },
 }) {
-  const stringify = arr => arr.map(({ name }) => name).join(', ');
-
   return (
     <article className={s.card}>
       <div className={s.thumb}>
@@ -27,22 +25,25 @@ function MovieInfo({
       </div>
 
       <div className={s.content}>
-        <h2 className={s.title}>{title}</h2>
+        <h2 className={s.title}>{`${title} (${release_date.slice(0, 4)})`}</h2>
 
-        <div className={s.descr}>
-          <p>{`${stringify(countries)} | ${release_date.slice(0, 4)}`}</p>
+        <div className={s.about}>
+          <p className={s.descr}>{genres.map(({ name }) => name).join(', ')}</p>
 
-          <h3 className={s.descrTitle}>Overview</h3>
-          <p>{overview}</p>
+          <h3 className={s.title}>Overview</h3>
+          <p className={s.descr}>{overview}</p>
 
-          <h4>Genres:</h4>
-          <p>{stringify(genres)}</p>
+          <p className={s.descr}>
+            <span className={s.descrTitle}>Popularity:</span> {popularity}
+          </p>
 
-          <h4>Popularity:</h4>
-          <p>{popularity}</p>
+          <p className={s.descr}>
+            <span className={s.descrTitle}>Score:</span> {vote_average}
+          </p>
 
-          <h4>User score:</h4>
-          <p>{vote_average}</p>
+          <p className={s.descr}>
+            <span className={s.descrTitle}>Votes:</span> {vote_count}
+          </p>
         </div>
       </div>
     </article>
@@ -52,12 +53,16 @@ function MovieInfo({
 MovieInfo.propTypes = {
   poster_path: PropTypes.string,
   title: PropTypes.string,
-  overview: PropTypes.string,
+  release_date: PropTypes.string,
   genres: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string,
     }),
   ),
+  overview: PropTypes.string,
+  popularity: PropTypes.number,
+  vote_average: PropTypes.number,
+  vote_count: PropTypes.number,
 };
 
 export default MovieInfo;

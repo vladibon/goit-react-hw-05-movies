@@ -23,8 +23,7 @@ function MoviesPage() {
       setMovies(results);
       setTotalPages(total_pages);
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query, page]);
+  }, [query, page, setSearchParams]);
 
   const handleSubmit = newQuery => {
     if (newQuery === query) return;

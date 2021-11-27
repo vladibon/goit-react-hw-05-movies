@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useFetch, Status } from 'hooks/useFetch';
+import Loading from 'components/Loading';
 import s from './Reviews.module.css';
 
 function Reviews() {
@@ -14,7 +15,7 @@ function Reviews() {
             {reviews.map(({ id, author, content }) => (
               <li className={s.reviewsItem} key={id}>
                 <p className={s.author}>Author: {author}</p>
-                <p>{content}</p>
+                <p className={s.content}>{content}</p>
               </li>
             ))}
           </ul>
@@ -24,6 +25,8 @@ function Reviews() {
       {status === Status.REJECTED && (
         <p>We don't have any reviews for this movie.</p>
       )}
+
+      {status === Status.PENDING && <Loading />}
     </>
   );
 }

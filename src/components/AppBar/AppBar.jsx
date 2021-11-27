@@ -1,5 +1,5 @@
-import Navigation from 'components/Navigation';
 import Container from 'components/Container';
+import Navigation from 'components/Navigation';
 import { ReactComponent as TmdbLogo } from 'images/tmdb_logo.svg';
 import s from './AppBar.module.css';
 

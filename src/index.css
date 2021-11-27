@@ -1,6 +1,9 @@
 :root {
   --text-color: #2a363b;
-  --accent-color: #00bfff;
+  --light-text-color: #eee;
+
+  --accent-color: #01b4e4;
+  --accent-bg-color: #0d253f;
 
   --overlay-bg-color: rgba(0, 0, 0, 0.15);
 
@@ -40,6 +43,7 @@ img {
 
 a {
   color: currentColor;
+  text-decoration: none;
 }
 
 h1,

@@ -31,10 +31,18 @@
   margin-bottom: 20px;
 }
 
-.descr:not(:last-child) {
+.about:not(:last-child) {
   margin-bottom: 20px;
 }
 
-.descrTitle {
+.title {
   margin-bottom: 12px;
+}
+
+.descr {
+  margin-bottom: 12px;
+}
+
+.descrTitle {
+  font-weight: 700;
 }

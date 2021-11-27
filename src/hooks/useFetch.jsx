@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { fetchMovieExtraInfo } from 'api/movie-db';
 
 const Status = {
@@ -24,4 +25,8 @@ function useFetch(movieId, type) {
   return [items, status];
 }
 
+useFetch.propTypes = {
+  movieId: PropTypes.number.isRequired,
+  type: PropTypes.string.isRequired,
+};
 export { useFetch, Status };
