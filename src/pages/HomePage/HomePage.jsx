@@ -9,7 +9,7 @@ function HomePage() {
   const [movies, setMovies] = useState([]);
   const [ref, inView] = useInView({
     initialInView: true,
-    rootMargin: '1200px',
+    rootMargin: '400px',
   });
 
   useEffect(() => {
