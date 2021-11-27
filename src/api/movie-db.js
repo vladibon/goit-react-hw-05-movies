@@ -7,22 +7,27 @@ axios.defaults.params = {
 
 const URL = {
   IMAGE: 'https://image.tmdb.org/t/p/w342',
+  TRAILER: 'https://www.youtube.com/embed/',
 };
 
 const pathname = {
   trending: 'trending',
   search: 'search',
 };
+
 const media_type = {
   movie: 'movie',
 };
+
 const time_window = {
   day: 'day',
   week: 'week',
 };
+
 const path_params = {
   credits: 'credits',
   reviews: 'reviews',
+  videos: 'videos',
 };
 
 async function fetchTrendingMovies(page) {
@@ -61,10 +66,19 @@ async function fetchMovieExtraInfo(movieId, type) {
   return isReviews ? data.results : data.cast;
 }
 
+async function fetchTrailerKey(movieId) {
+  const { data } = await axios(
+    `${media_type.movie}/${movieId}/${path_params.videos}`,
+  );
+
+  return data.results[0]?.key;
+}
+
 export {
   URL,
   fetchTrendingMovies,
   fetchSearchedMovies,
   fetchMovieInfo,
   fetchMovieExtraInfo,
+  fetchTrailerKey,
 };
