@@ -22,7 +22,7 @@ function MoviesPage() {
     fetchSearchedMovies({ query, page }).then(({ results, total_pages }) => {
       setMovies(results);
       setTotalPages(total_pages);
-      scrollTop();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }, [query, page, setSearchParams]);
 
@@ -34,13 +34,6 @@ function MoviesPage() {
 
   const handleClick = step =>
     setSearchParams({ query, page: Number(page) + step });
-
-  function scrollTop() {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  }
 
   return (
     <main>
