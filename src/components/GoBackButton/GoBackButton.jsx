@@ -6,11 +6,14 @@ function GoBackButton() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const pathname = location.state?.from?.pathname;
+  const search = location.state?.from?.search;
+
   return (
     <button
       className={s.button}
       type='button'
-      onClick={() => navigate(location.state?.pathname ? -1 : '/')}
+      onClick={() => navigate(pathname ? `${pathname}${search}` : '/')}
     >
       <ArrowLeft className={s.icon} />
       Go back

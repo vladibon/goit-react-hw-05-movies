@@ -1,11 +1,11 @@
 import { useParams } from 'react-router-dom';
 import { useFetch, Status } from 'hooks/useFetch';
-import Loading from 'components/Loading';
+import { fetchReviews } from 'api/movie-db';
 import s from './Reviews.module.css';
 
 function Reviews() {
   const { movieId } = useParams();
-  const [reviews, status] = useFetch(movieId, 'reviews');
+  const [reviews, status] = useFetch(() => fetchReviews(movieId));
 
   return (
     <>
@@ -25,8 +25,6 @@ function Reviews() {
       {status === Status.REJECTED && (
         <p>We don't have any reviews for this movie.</p>
       )}
-
-      {status === Status.PENDING && <Loading />}
     </>
   );
 }

@@ -49,21 +49,26 @@ async function fetchSearchedMovies({ query, page }) {
   return data;
 }
 
-async function fetchMovieInfo(movieId) {
+async function fetchMovieDetails(movieId) {
   const { data } = await axios(`${media_type.movie}/${movieId}`);
 
   return data;
 }
 
-async function fetchMovieExtraInfo(movieId, type) {
-  const isReviews = type === path_params.reviews;
+async function fetchCast(movieId) {
   const { data } = await axios(
-    `${media_type.movie}/${movieId}/${
-      isReviews ? path_params.reviews : path_params.credits
-    }`,
+    `${media_type.movie}/${movieId}/${path_params.credits}`,
   );
 
-  return isReviews ? data.results : data.cast;
+  return data.cast;
+}
+
+async function fetchReviews(movieId) {
+  const { data } = await axios(
+    `${media_type.movie}/${movieId}/${path_params.reviews}`,
+  );
+
+  return data.results;
 }
 
 async function fetchTrailerKey(movieId) {
@@ -78,7 +83,8 @@ export {
   URL,
   fetchTrendingMovies,
   fetchSearchedMovies,
-  fetchMovieInfo,
-  fetchMovieExtraInfo,
+  fetchMovieDetails,
+  fetchCast,
+  fetchReviews,
   fetchTrailerKey,
 };

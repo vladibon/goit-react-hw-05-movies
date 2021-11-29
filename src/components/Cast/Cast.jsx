@@ -1,13 +1,12 @@
 import { useParams } from 'react-router-dom';
 import { useFetch, Status } from 'hooks/useFetch';
-import Loading from 'components/Loading';
-import { URL } from 'api/movie-db';
+import { fetchCast, URL } from 'api/movie-db';
 import defaultImage from 'images/defaultCast.png';
 import s from './Cast.module.css';
 
 function Cast() {
   const { movieId } = useParams();
-  const [cast, status] = useFetch(movieId, 'credits');
+  const [cast, status] = useFetch(() => fetchCast(movieId));
 
   return (
     <>
@@ -36,8 +35,6 @@ function Cast() {
       {status === Status.REJECTED && (
         <p>We don't have any cast information for this movie.</p>
       )}
-
-      {status === Status.PENDING && <Loading />}
     </>
   );
 }

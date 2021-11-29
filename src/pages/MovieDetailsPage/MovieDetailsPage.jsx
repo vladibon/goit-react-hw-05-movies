@@ -1,10 +1,21 @@
-import { useState, useEffect } from 'react';
-import { useParams, Outlet } from 'react-router-dom';
-import MovieInfo from 'components/MovieInfo';
-import MovieInfoControls from 'components/MovieInfoControls';
+import { Suspense, lazy, useState, useEffect } from 'react';
+import { Routes, Route, useParams } from 'react-router-dom';
 import GoBackButton from 'components/GoBackButton';
-import { fetchMovieInfo, fetchTrailerKey } from 'api/movie-db';
+import MovieDetails from 'components/MovieDetails';
+import MovieDetailsControls from 'components/MovieDetailsControls';
+import Loading from 'components/Loading/Loading';
+import { fetchMovieDetails, fetchTrailerKey } from 'api/movie-db';
 import s from './MovieDetailsPage.module.css';
+
+const Cast = lazy(() =>
+  import('components/Cast' /* webpackChunkName: "cast" */),
+);
+const Reviews = lazy(() =>
+  import('components/Reviews' /* webpackChunkName: "reviews" */),
+);
+const Trailer = lazy(() =>
+  import('components/Trailer' /* webpackChunkName: "trailer" */),
+);
 
 function MovieDetailsPage() {
   const { movieId } = useParams();
@@ -12,19 +23,26 @@ function MovieDetailsPage() {
   const [trailerKey, setTrailerKey] = useState(null);
 
   useEffect(() => {
-    fetchMovieInfo(movieId).then(setMovie);
+    fetchMovieDetails(movieId).then(setMovie);
     fetchTrailerKey(movieId).then(setTrailerKey);
   }, [movieId]);
 
   return (
     <main>
       <GoBackButton />
-      {movie && <MovieInfo movie={movie} />}
+      {movie && <MovieDetails movie={movie} />}
 
       <section>
         <h3 className={s.title}>Additional information</h3>
-        <MovieInfoControls trailerKey={trailerKey} />
-        <Outlet />
+        <MovieDetailsControls trailerKey={trailerKey} />
+
+        <Suspense fallback={<Loading />}>
+          <Routes>
+            <Route path='cast' element={<Cast />} />
+            <Route path='reviews' element={<Reviews />} />
+            <Route path=':trailerKey' element={<Trailer />} />
+          </Routes>
+        </Suspense>
       </section>
     </main>
   );

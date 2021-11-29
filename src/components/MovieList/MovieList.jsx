@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import { useLocation, Link } from 'react-router-dom';
-import MovieCard from 'components/MovieCard';
+import { Link, useLocation } from 'react-router-dom';
+import MovieCard from 'components/MovieList/MovieCard';
 import s from './MovieList.module.css';
 
 function MovieList({ movies }) {
@@ -10,7 +10,7 @@ function MovieList({ movies }) {
     <ul className={s.gallery}>
       {movies.map(({ id, title, poster_path, release_date }, idx) => (
         <li key={`${id}${idx}`}>
-          <Link to={`/movies/${id}`} state={location}>
+          <Link to={`/movies/${id}`} state={{ from: location }}>
             <MovieCard
               title={title}
               poster_path={poster_path}

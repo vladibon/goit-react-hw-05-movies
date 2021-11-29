@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { URL } from 'api/movie-db';
 import s from './Trailer.module.css';
 
@@ -8,11 +8,17 @@ const modalRoot = document.querySelector('#modal-root');
 
 function Trailer() {
   const { trailerKey } = useParams();
+  const location = useLocation();
   const navigate = useNavigate();
+
+  const closeTrailer = useCallback(
+    () => navigate('..', { state: { from: location.state?.from } }),
+    [location.state?.from, navigate],
+  );
 
   useEffect(() => {
     const handleKeyDown = ({ code }) => {
-      code === 'Escape' && navigate(-1);
+      code === 'Escape' && closeTrailer();
     };
 
     window.addEventListener('keydown', handleKeyDown);
@@ -22,10 +28,10 @@ function Trailer() {
       window.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = 'unset';
     };
-  }, [navigate]);
+  }, [closeTrailer]);
 
   const handleOverlayClick = ({ currentTarget, target }) => {
-    currentTarget === target && navigate(-1);
+    currentTarget === target && closeTrailer();
   };
 
   return createPortal(

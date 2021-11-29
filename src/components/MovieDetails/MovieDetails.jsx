@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import { URL } from 'api/movie-db';
-import s from './MovieInfo.module.css';
+import s from './MovieDetails.module.css';
 import defaultImage from 'images/defaultImage.png';
 
-function MovieInfo({
+function MovieDetails({
   movie: {
     poster_path,
     title,
@@ -50,7 +50,7 @@ function MovieInfo({
   );
 }
 
-MovieInfo.propTypes = {
+MovieDetails.propTypes = {
   poster_path: PropTypes.string,
   title: PropTypes.string,
   release_date: PropTypes.string,
@@ -65,4 +65,4 @@ MovieInfo.propTypes = {
   vote_count: PropTypes.number,
 };
 
-export default MovieInfo;
+export default MovieDetails;
