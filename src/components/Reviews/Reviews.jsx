@@ -1,11 +1,12 @@
 import { useParams } from 'react-router-dom';
-import { useFetch, Status } from 'hooks/useFetch';
-import { fetchReviews } from 'api/movie-db';
+import { useFetchReviews, Status } from 'hooks/useFetchReviews';
+import getMovieId from 'slugify/getMovieId';
 import s from './Reviews.module.css';
 
 function Reviews() {
-  const { movieId } = useParams();
-  const [reviews, status] = useFetch(() => fetchReviews(movieId));
+  const { slug } = useParams();
+  const movieId = getMovieId(slug);
+  const [reviews, status] = useFetchReviews(movieId);
 
   return (
     <>

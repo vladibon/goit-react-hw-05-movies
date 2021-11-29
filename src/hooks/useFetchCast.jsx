@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { fetchCast } from 'api/movie-db';
 
 const Status = {
   IDLE: 'idle',
@@ -8,24 +9,24 @@ const Status = {
   REJECTED: 'rejected',
 };
 
-function useFetch(fetchItems) {
+function useFetchCast(movieId) {
   const [items, setItems] = useState([]);
   const [status, setStatus] = useState(Status.PENDING);
 
   useEffect(() => {
-    fetchItems()
+    fetchCast(movieId)
       .then(items => {
         setItems(items);
         setStatus(items.length ? Status.RESOLVED : Status.REJECTED);
       })
       .catch(() => setStatus(Status.REJECTED));
-  }, [fetchItems]);
+  }, [movieId]);
 
   return [items, status];
 }
 
-useFetch.propTypes = {
+useFetchCast.propTypes = {
   fetchItems: PropTypes.func.isRequired,
 };
 
-export { useFetch, Status };
+export { useFetchCast, Status };

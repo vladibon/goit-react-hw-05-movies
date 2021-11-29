@@ -1,12 +1,14 @@
 import { useParams } from 'react-router-dom';
-import { useFetch, Status } from 'hooks/useFetch';
-import { fetchCast, URL } from 'api/movie-db';
+import { useFetchCast, Status } from 'hooks/useFetchCast';
+import { URL } from 'api/movie-db';
+import getMovieId from 'slugify/getMovieId';
 import defaultImage from 'images/defaultCast.png';
 import s from './Cast.module.css';
 
 function Cast() {
-  const { movieId } = useParams();
-  const [cast, status] = useFetch(() => fetchCast(movieId));
+  const { slug } = useParams();
+  const movieId = getMovieId(slug);
+  const [cast, status] = useFetchCast(movieId);
 
   return (
     <>

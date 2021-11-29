@@ -4,6 +4,7 @@ import GoBackButton from 'components/GoBackButton';
 import MovieDetails from 'components/MovieDetails';
 import MovieDetailsControls from 'components/MovieDetailsControls';
 import Loading from 'components/Loading/Loading';
+import getMovieId from 'slugify/getMovieId';
 import { fetchMovieDetails, fetchTrailerKey } from 'api/movie-db';
 import s from './MovieDetailsPage.module.css';
 
@@ -18,7 +19,8 @@ const Trailer = lazy(() =>
 );
 
 function MovieDetailsPage() {
-  const { movieId } = useParams();
+  const { slug } = useParams();
+  const movieId = getMovieId(slug);
   const [movie, setMovie] = useState(null);
   const [trailerKey, setTrailerKey] = useState(null);
 
