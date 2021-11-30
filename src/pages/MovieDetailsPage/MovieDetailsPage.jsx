@@ -42,7 +42,10 @@ function MovieDetailsPage() {
           <Routes>
             <Route path='cast' element={<Cast />} />
             <Route path='reviews' element={<Reviews />} />
-            <Route path=':trailerKey' element={<Trailer />} />
+            <Route
+              path='trailer'
+              element={<Trailer trailerKey={trailerKey} />}
+            />
           </Routes>
         </Suspense>
       </section>

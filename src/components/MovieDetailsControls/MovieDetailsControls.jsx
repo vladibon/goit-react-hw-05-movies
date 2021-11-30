@@ -29,7 +29,7 @@ function MovieDetailsControls({ trailerKey }) {
 
       {trailerKey && (
         <NavLink
-          to={trailerKey}
+          to='trailer'
           state={{ from: location.state?.from }}
           className={applyClassName}
         >

@@ -1,13 +1,12 @@
 import { useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
-import { useParams, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { URL } from 'api/movie-db';
 import s from './Trailer.module.css';
 
 const modalRoot = document.querySelector('#modal-root');
 
-function Trailer() {
-  const { trailerKey } = useParams();
+function Trailer({ trailerKey }) {
   const location = useLocation();
   const navigate = useNavigate();
 
