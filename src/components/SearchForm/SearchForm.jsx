@@ -23,7 +23,6 @@ function SearchForm({ onSubmit }) {
         name='searchQuery'
         value={query}
         autoComplete='off'
-        autoFocus
         placeholder='Search movies'
         onChange={e => setQuery(e.target.value)}
       />
