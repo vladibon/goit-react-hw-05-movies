@@ -38,7 +38,7 @@ async function fetchTrendingMovies(page) {
     },
   );
 
-  return data.results;
+  return data;
 }
 
 async function fetchSearchedMovies({ query, page }) {

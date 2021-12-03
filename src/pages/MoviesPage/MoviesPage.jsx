@@ -1,30 +1,41 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { useQuery, useQueryClient } from 'react-query';
 import SearchForm from 'components/SearchForm';
 import Section from 'components/Section/Section';
 import MovieList from 'components/MovieList';
 import PageControls from 'components/PageControls';
+import Loading from 'components/Loading';
+import NotFound from 'components/NotFound';
 import { fetchSearchedMovies } from 'api/movie-db';
 
 function MoviesPage() {
-  const [movies, setMovies] = useState([]);
-  const [totalPages, setTotalPages] = useState(null);
+  const queryClient = useQueryClient();
   const [searchParams, setSearchParams] = useSearchParams();
-
   const query = searchParams.get('query');
-  const page = searchParams.get('page');
-  const isLastPage = Number(page) === totalPages;
+  const page = Number(searchParams.get('page'));
+
+  const { data, error, isLoading, isError, isSuccess } = useQuery(
+    ['movies', query, page],
+    () => fetchSearchedMovies({ query, page }),
+    { enabled: !!query && !!page, keepPreviousData: true, staleTime: 60000 },
+  );
+
+  const isLastPage = page === data?.total_pages;
 
   useEffect(() => {
-    if (!query) return;
-    if (!page) return setSearchParams({ query, page: 1 });
+    if (!query || isLastPage) return;
 
-    fetchSearchedMovies({ query, page }).then(({ results, total_pages }) => {
-      setMovies(results);
-      setTotalPages(total_pages);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  }, [query, page, setSearchParams]);
+    queryClient.prefetchQuery(
+      ['movies', query, page + 1],
+      () => fetchSearchedMovies({ query, page: page + 1 }),
+      { keepPreviousData: true, staleTime: 60000 },
+    );
+  }, [query, page, isLastPage, queryClient]);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [data]);
 
   const handleSubmit = newQuery => {
     if (newQuery === query) return;
@@ -32,19 +43,20 @@ function MoviesPage() {
     setSearchParams({ query: newQuery, page: 1 });
   };
 
-  const handleClick = step =>
-    setSearchParams({ query, page: Number(page) + step });
+  const handleClick = step => setSearchParams({ query, page: page + step });
 
   return (
     <main>
       <SearchForm onSubmit={handleSubmit} />
 
-      {movies.length > 0 && (
+      {isLoading && <Loading />}
+      {isError && <NotFound message={error.message} />}
+      {isSuccess && (
         <Section title='Movies'>
-          <MovieList movies={movies} />
+          <MovieList movies={data.results} />
 
           <PageControls
-            page={Number(page)}
+            page={page}
             setPage={handleClick}
             isLastPage={isLastPage}
           />
